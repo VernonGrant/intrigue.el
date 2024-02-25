@@ -39,13 +39,13 @@
     :prefix "intrigue-package-")
 
 (defcustom intrigue-package-enable-icons t
-    "Should Intrique place icons in front of file names."
-    :group 'intrique
+    "Should Intrigue place icons in front of file names."
+    :group 'intrigue
     :type 'boolean)
 
 (defcustom intrigue-package-file-location "~/.emacs-intrigue.el"
-    "Your Intrique entries will be saved inside of this file."
-    :group 'intrique
+    "Your Intrigue entries will be saved inside of this file."
+    :group 'intrigue
     :type 'file)
 
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -59,8 +59,8 @@
   (project-root (project-current nil)))
 
 (defun intrigue--init()
-  "Load the saved intrique data into memory."
-  (message "initialized intrique!")
+  "Load the saved intrigue data into memory."
+  (message "initialized intrigue!")
   (write-region "" nil intrigue-package-file-location t)
   (with-temp-buffer
     (insert-file-contents intrigue-package-file-location)
@@ -74,7 +74,7 @@
       (prin1 intrigue--files (current-buffer)))))
 
 (defun intrigue-add()
-  "Add the current file to the Intrique list."
+  "Add the current file to the Intrigue list."
   (interactive)
   (let* ((p-key (intrigue--get-project-key))
          (f-name (file-name-nondirectory (buffer-file-name)))
@@ -131,9 +131,9 @@ CHOICE: hello world."
     (when (not current?)
       (find-file f-path))))
 
-;; TODO: Implement an intrique next and previous
+;; TODO: Implement an intrigue next and previous
 
-(eval-after-load 'intrique (intrigue--init))
+(eval-after-load 'intrigue (intrigue--init))
 (provide 'intrigue)
 
 ;;; intrigue.el ends here
