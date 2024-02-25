@@ -60,12 +60,14 @@
 
 (defun intrigue--init()
   "Load the saved intrigue data into memory."
-  (message "initialized intrigue!")
+  ;; Insure the file exists.
   (write-region "" nil intrigue-package-file-location t)
   (with-temp-buffer
     (insert-file-contents intrigue-package-file-location)
     (goto-char (point-min))
-    (set 'intrigue--files (read (current-buffer)))))
+    (set 'intrigue--files (read (current-buffer))))
+  (message "initialized intrigue!")
+  nil)
 
 (defun intrigue--save()
   "Write the current Intrigue state to disk."
@@ -133,7 +135,9 @@ CHOICE: hello world."
 
 ;; TODO: Implement an intrigue next and previous
 
-(eval-after-load 'intrigue (intrigue--init))
+(eval-after-load 'intrigue (lambda ()
+                             (intrigue--init)
+                             nil))
 (provide 'intrigue)
 
 ;;; intrigue.el ends here
